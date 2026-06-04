@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geo-audit"
+version = "0.1.0"
+description = "GEO audit CLI — score any URL for LLM visibility in 5 seconds. Zero dependencies, pure Python stdlib."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Harel Asaf" }]
+keywords = ["cli", "seo", "geo", "llm", "ai-search", "perplexity", "generative-engine-optimization"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+]
+
+[project.urls]
+Homepage = "https://github.com/RLASAF12/geo-audit"
+Issues = "https://github.com/RLASAF12/geo-audit/issues"
+
+[project.scripts]
+geo-audit = "geo_audit:main"
+
+[tool.setuptools]
+py-modules = ["geo_audit"]
+
+[tool.setuptools.data-files]
+"." = ["geo-audit.py"]
