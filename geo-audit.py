@@ -61,7 +61,8 @@ class GeoParser(HTMLParser):
 
         if self.in_script == "jsonld":
             try: self.data["json_ld"].append(json.loads(clean_data))
-            except: pass
+            except json.JSONDecodeError: pass
+            return  # JSON-LD is metadata, not visible copy — don't count it toward word_count
         elif self.current_tag == "title": self.data["title"] = clean_data
         elif self.current_tag in self.data["headings"]: self.data["headings"][self.current_tag].append(clean_data)
 
@@ -138,6 +139,7 @@ def print_markdown(r):
     print(f"{emo(r['scores']['Structure'])} Structure for extraction: {r['scores']['Structure']}/5")
     print(f"{emo(r['scores']['Schema'])} Structured data coverage: {r['scores']['Schema']}/5\n")
     print(f"**TOTAL SCORE: {r['total']}/20 | GRADE: {r['grade']}**\n")
+    print(f"Signals: {r['word_count']} words · link density {r['link_density']}\n")
     if r['fixes']:
         print("## Recommended Fixes")
         for f in r['fixes']: print(f"- {f}")
